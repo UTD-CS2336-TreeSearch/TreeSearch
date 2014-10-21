@@ -1,4 +1,4 @@
-public class BinaryTree<E extends Comparable<E>> {;
+public class BinaryTree<E extends Comparable<E>> {
 	protected Node<E> root;
 	protected int size = 0;
 
