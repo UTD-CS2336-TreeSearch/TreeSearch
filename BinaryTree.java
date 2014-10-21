@@ -107,7 +107,7 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	//Clear array
-	public void clear() {
+	public void fire() {
 		root = null;
 		size = 0;
 	}
