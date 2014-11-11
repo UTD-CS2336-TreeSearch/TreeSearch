@@ -55,37 +55,43 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	//Output inorder
-	public void inorder() {
-		inorder(root);
+	public String inorder() {
+		StringBuilder builder = new StringBuilder();
+		inorder(root, builder);
+		return builder();
 	}
-	protected void inorder(Node<E> root) {
+	protected void inorder(Node<E> root, StringBuilder builder) {
 		if (root == null)
 			return;
 		inorder(root.left);
-		System.out.print(root.element + " ");
+		builder.append(root.element + " ");
 		inorder(root.right);
 	}
 
 	//Output postorder
-	public void postorder() {
-		postorder(root);
+	public String postorder() {
+		StringBuilder builder = new StringBuilder();
+		postorder(root, builder);
+		return builder();
 	}
-	protected void postorder(Node<E> root) {
+	protected void postorder(Node<E> root, StringBuilder builder) {
 		if (root == null)
 			return;
 		postorder(root.left);
 		postorder(root.right);
-		System.out.print(root.element + " ");
+		builder.append(root.element + " ");
 	}
 
 	//Output preorder
-	public void preorder() {
+	public String preorder() {
+		StringBuilder builder = new StringBuilder();
 		preorder(root);
+		return builder();
 	}
-	protected void preorder(Node<E> root) {
+	protected void preorder(Node<E> root, StringBuilder builder) {
 		if (root == null)
 			return;
-		System.out.print(root.element + " ");
+		builder.append(root.element + " ");
 		preorder(root.left);
 		preorder(root.right);
 	}
