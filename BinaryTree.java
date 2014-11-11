@@ -111,4 +111,19 @@ public class BinaryTree<E extends Comparable<E>> {
 		root = null;
 		size = 0;
 	}
+	
+	//Create tree from tree
+	public void buildFromFile() {
+		
+	}
+	
+	//Print tree to file
+	public void printToFile() {
+		
+	}
+	
+	//Display tree
+	public void displayTree() {
+		
+	}
 }
