@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class BinaryTree<E extends Comparable<E>> {
 	protected Node<E> root;
 	protected int size = 0;
@@ -55,45 +57,45 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	//Output inorder
-	public String inorder() {
-		StringBuilder builder = new StringBuilder();
-		inorder(root, builder);
-		return builder.toString();
+	public ArrayList<E> inorder() {
+		ArrayList<E> storage = new ArrayList<E>();
+		inorder(root, storage);
+		return storage;
 	}
-	protected void inorder(Node<E> root, StringBuilder builder) {
+	protected void inorder(Node<E> root, ArrayList<E> storage) {
 		if (root == null)
 			return;
-		inorder(root.left, builder);
-		builder.append(root.element + " ");
-		inorder(root.right, builder);
+		inorder(root.left, storage);
+		storage.add(root.element);
+		inorder(root.right, storage);
 	}
 
 	//Output postorder
-	public String postorder() {
-		StringBuilder builder = new StringBuilder();
-		postorder(root, builder);
-		return builder.toString();
+	public ArrayList<E> postorder() {
+		ArrayList<E> storage = new ArrayList<E>();
+		postorder(root, storage);
+		return storage;
 	}
-	protected void postorder(Node<E> root, StringBuilder builder) {
+	protected void postorder(Node<E> root, ArrayList<E> storage) {
 		if (root == null)
 			return;
-		postorder(root.left, builder);
-		postorder(root.right, builder);
-		builder.append(root.element + " ");
+		postorder(root.left, storage);
+		postorder(root.right, storage);
+		storage.add(root.element);
 	}
 
 	//Output preorder
-	public String preorder() {
-		StringBuilder builder = new StringBuilder();
-		preorder(root, builder);
-		return builder.toString();
+	public ArrayList<E> preorder() {
+		ArrayList<E> storage = new ArrayList<E>();
+		preorder(root, storage);
+		return storage;
 	}
-	protected void preorder(Node<E> root, StringBuilder builder) {
+	protected void preorder(Node<E> root, ArrayList<E> storage) {
 		if (root == null)
 			return;
-		builder.append(root.element + " ");
-		preorder(root.left, builder);
-		preorder(root.right, builder);
+		storage.add(root.element);
+		preorder(root.left, storage);
+		preorder(root.right, storage);
 	}
 
 	//The core nucleus thingy kajigger
@@ -113,7 +115,7 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	//Clear array
-	public void fire() {
+	public void order66() {
 		root = null;
 		size = 0;
 	}
