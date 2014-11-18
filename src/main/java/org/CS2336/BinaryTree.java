@@ -1,3 +1,7 @@
+import java.util.Scanner;
+
+java.import.Scanner;
+
 public class BinaryTree<E extends Comparable<E>> {
 	protected Node<E> root;
 	protected int size = 0;
@@ -113,8 +117,14 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 	
 	//Create tree from tree
-	public void buildFromFile() {
-		
+	public void buildFromFile(File newFile) {
+		Scanner file = new Scanner(newFile);
+		String input;
+		input = file.nextLine();
+		String[] arrayedInput = input.split(" ");
+		for (int i = 0; i < arrayedInput.length(); i++){
+			insert(arrayedInput[i]);
+		}
 	}
 	
 	//Print tree to file
