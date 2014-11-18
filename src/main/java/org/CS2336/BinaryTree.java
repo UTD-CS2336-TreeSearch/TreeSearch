@@ -1,6 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
-java.import.Scanner;
 
 public class BinaryTree<E extends Comparable<E>> {
 	protected Node<E> root;
@@ -59,39 +59,45 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	//Output inorder
-	public void inorder() {
-		inorder(root);
+	public ArrayList<E> inorder() {
+		ArrayList<E> storage = new ArrayList<E>();
+		inorder(root, storage);
+		return storage;
 	}
-	protected void inorder(Node<E> root) {
+	protected void inorder(Node<E> root, ArrayList<E> storage) {
 		if (root == null)
 			return;
-		inorder(root.left);
-		System.out.print(root.element + " ");
-		inorder(root.right);
+		inorder(root.left, storage);
+		storage.add(root.element);
+		inorder(root.right, storage);
 	}
 
 	//Output postorder
-	public void postorder() {
-		postorder(root);
+	public ArrayList<E> postorder() {
+		ArrayList<E> storage = new ArrayList<E>();
+		postorder(root, storage);
+		return storage;
 	}
-	protected void postorder(Node<E> root) {
+	protected void postorder(Node<E> root, ArrayList<E> storage) {
 		if (root == null)
 			return;
-		postorder(root.left);
-		postorder(root.right);
-		System.out.print(root.element + " ");
+		postorder(root.left, storage);
+		postorder(root.right, storage);
+		storage.add(root.element);
 	}
 
 	//Output preorder
-	public void preorder() {
-		preorder(root);
+	public ArrayList<E> preorder() {
+		ArrayList<E> storage = new ArrayList<E>();
+		preorder(root, storage);
+		return storage;
 	}
-	protected void preorder(Node<E> root) {
+	protected void preorder(Node<E> root, ArrayList<E> storage) {
 		if (root == null)
 			return;
-		System.out.print(root.element + " ");
-		preorder(root.left);
-		preorder(root.right);
+		storage.add(root.element);
+		preorder(root.left, storage);
+		preorder(root.right, storage);
 	}
 
 	//The core nucleus thingy kajigger
@@ -111,7 +117,7 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	//Clear array
-	public void fire() {
+	public void order66() {
 		root = null;
 		size = 0;
 	}
