@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class BinaryTree<E extends Comparable<E>> {
 	protected Node<E> root;
 	protected int size = 0;
@@ -118,8 +120,37 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 	
 	//Print tree to file
-	public void printToFile() {
-		
+	public void printToFile() throws IOException {
+            try{
+		File preorderOut = new File("preorder.out.text");
+                PrintWriter printPreorder = new PrintWriter(preorderOut);
+                preorder(root);
+                printPreorder.println(root);
+                printPreorder.close();
+            }
+            catch (IOException e){
+                System.out.println("Exception occured.");
+            }
+            try{
+                File inorderOut = new File("inorder.out.text");
+                PrintWriter printInorder = new PrintWriter(inorderOut);
+                inorder(root);
+                printInorder.println(root);
+                printInorder.close();
+            }
+            catch (IOException e){
+                System.out.println("Exception occured.");
+            }
+            try{
+                File postorderOut = new File("postorder.out.text");
+                PrintWriter printPostorder = new PrintWriter(postorderOut);
+                postorder(root);
+                printPostorder.println(root);
+                printPostorder.close();
+            }
+            catch (IOException e){
+                System.out.println("Exception occured.");
+            }
 	}
 	
 	//Display tree
