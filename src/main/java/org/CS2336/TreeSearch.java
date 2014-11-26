@@ -21,6 +21,7 @@ public class TreeSearch {
         textGUI.getScreen().startScreen();
         textGUI.setTitle("GUI Test");
 
+        
         //Do GUI logic here
 
         textGUI.getScreen().stopScreen();
