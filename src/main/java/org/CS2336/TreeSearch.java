@@ -1,5 +1,8 @@
 package org.CS2336;
 
+import com.googlecode.lanterna.TerminalFacade;
+import com.googlecode.lanterna.gui.GUIScreen;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,7 +13,17 @@ import java.util.Scanner;
 public class TreeSearch {
     BinaryTree<String> myTree = new BinaryTree<String>();
     public static void main(String[] args) {
+        GUIScreen textGUI = TerminalFacade.createGUIScreen();
+        if(textGUI == null) {
+            System.err.println("Couldn't allocate a terminal!");
+            return;
+        }
+        textGUI.getScreen().startScreen();
+        textGUI.setTitle("GUI Test");
 
+        //Do GUI logic here
+
+        textGUI.getScreen().stopScreen();
     }
 
 
