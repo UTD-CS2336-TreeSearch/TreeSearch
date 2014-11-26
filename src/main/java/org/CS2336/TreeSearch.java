@@ -1,7 +1,14 @@
 package org.CS2336;
 
 import com.googlecode.lanterna.TerminalFacade;
+import com.googlecode.lanterna.gui.Border;
 import com.googlecode.lanterna.gui.GUIScreen;
+import com.googlecode.lanterna.gui.Window;
+import com.googlecode.lanterna.gui.component.Label;
+import com.googlecode.lanterna.gui.component.Panel;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.SwingTerminal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +19,7 @@ import java.util.Scanner;
 
 public class TreeSearch {
     BinaryTree<String> myTree = new BinaryTree<String>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         GUIScreen textGUI = TerminalFacade.createGUIScreen();
         if(textGUI == null) {
             System.err.println("Couldn't allocate a terminal!");
@@ -20,11 +27,14 @@ public class TreeSearch {
         }
         textGUI.getScreen().startScreen();
         textGUI.setTitle("GUI Test");
-
-        
+        Terminal term = textGUI.getScreen().getTerminal();
         //Do GUI logic here
 
+        MyWindow myWindow = new MyWindow();
+        textGUI.showWindow(myWindow, GUIScreen.Position.CENTER);
+        textGUI.getActiveWindow().close();
         textGUI.getScreen().stopScreen();
+        textGUI.invalidate();
     }
 
 
@@ -69,5 +79,14 @@ public class TreeSearch {
             System.out.println("Exception occured " + e);
         }
 
+    }
+}
+
+class MyWindow extends Window {
+    public MyWindow() {
+        super("My Window!");
+        Panel horisontalPanel = new Panel(new Border.Invisible(), Panel.Orientation.HORISONTAL);
+        horisontalPanel.addComponent(new Label("Welcome to TreeSearch"));
+        addComponent(horisontalPanel);
     }
 }
