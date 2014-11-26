@@ -1,4 +1,5 @@
-import java.util.Scanner;
+package org.CS2336;
+
 import java.util.ArrayList;
 
 
@@ -122,52 +123,7 @@ public class BinaryTree<E extends Comparable<E>> {
 		size = 0;
 	}
 	
-	//Create tree from tree
-	public void buildFromFile(File newFile) {
-		Scanner file = new Scanner(newFile);
-		String input;
-		input = file.nextLine();
-		String[] arrayedInput = input.split(" ");
-		for (int i = 0; i < arrayedInput.length(); i++){
-			insert(arrayedInput[i]);
-		}
-	}
-	
-	//Print tree to file
-	public void printToFile() throws IOException {
-		try{
-                    File preorderOut = new File("preorder.out.text");
-                    PrintWriter printPreorder = new PrintWriter(preorderOut);
-                    ArrayList<String> preorderstorage = new ArrayList(preorder());
-                    printPreorder.println(preorderstorage);
-                    printPreorder.close();
-                }
-                catch (IOException e){
-                System.out.println("Exception occured " + e);
-                }
-                try{
-                    File inorderOut = new File("inorder.out.text");
-                    PrintWriter printInorder = new PrintWriter(inorderOut);
-                    ArrayList<String> inorderstorage = new ArrayList(inorder());
-                    printInorder.println(inorderstorage);
-                    printInorder.close();
-                }
-                catch (IOException e){
-                System.out.println("Exception occured " + e);
-                }
-                try{
-                    File postorderOut = new File("postorder.out.text");
-                    PrintWriter printPostorder = new PrintWriter(postorderOut);
-                    ArrayList<String> postorderstorage = new ArrayList(postorder());
-                    printPostorder.println(postorderstorage);
-                    printPostorder.close();
-                }
-                catch (IOException e){
-                System.out.println("Exception occured " + e);
-                }
-                
-	}
-	
+
 	//Display tree
 	public void displayTree() {
 		
