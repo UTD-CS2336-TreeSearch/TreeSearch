@@ -126,10 +126,12 @@ public class BinaryTree<E extends Comparable<E>> {
 	public void buildFromFile(File newFile) {
 		Scanner file = new Scanner(newFile);
 		String input;
-		input = file.nextLine();
-		String[] arrayedInput = input.split(" ");
-		for (int i = 0; i < arrayedInput.length(); i++){
-			insert(arrayedInput[i]);
+		if(file.hasNextLine()) {
+			input = file.nextLine();
+			String[] arrayedInput = input.split(" ");
+			for (int i = 0; i < arrayedInput.length(); i++){
+				insert(arrayedInput[i]);
+			}
 		}
 	}
 	
