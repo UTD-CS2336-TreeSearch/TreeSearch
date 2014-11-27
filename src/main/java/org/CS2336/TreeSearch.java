@@ -27,14 +27,17 @@ public class TreeSearch {
         }
         textGUI.getScreen().startScreen();
         textGUI.setTitle("GUI Test");
-        Terminal term = textGUI.getScreen().getTerminal();
         //Do GUI logic here
 
+        System.out.println("made it to window launch");
         MyWindow myWindow = new MyWindow();
+        System.out.println("instantiated; drawing");
         textGUI.showWindow(myWindow, GUIScreen.Position.CENTER);
+        System.out.println("drew window");
         textGUI.getActiveWindow().close();
+        textGUI.getScreen().refresh();
+        textGUI.getScreen().refresh();
         textGUI.getScreen().stopScreen();
-        textGUI.invalidate();
     }
 
 
@@ -85,8 +88,6 @@ public class TreeSearch {
 class MyWindow extends Window {
     public MyWindow() {
         super("My Window!");
-        Panel horisontalPanel = new Panel(new Border.Invisible(), Panel.Orientation.HORISONTAL);
-        horisontalPanel.addComponent(new Label("Welcome to TreeSearch"));
-        addComponent(horisontalPanel);
+        addComponent(new Label("Welcome to TreeSearch"));
     }
 }
