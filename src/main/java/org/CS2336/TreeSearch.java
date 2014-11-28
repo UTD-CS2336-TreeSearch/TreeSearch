@@ -1,14 +1,12 @@
 package org.CS2336;
 
 import com.googlecode.lanterna.TerminalFacade;
-import com.googlecode.lanterna.gui.Border;
+import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
+import com.googlecode.lanterna.gui.component.Button;
 import com.googlecode.lanterna.gui.component.Label;
-import com.googlecode.lanterna.gui.component.Panel;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.SwingTerminal;
+import com.googlecode.lanterna.gui.dialog.MessageBox;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,7 +32,6 @@ public class TreeSearch {
         System.out.println("instantiated; drawing");
         textGUI.showWindow(myWindow, GUIScreen.Position.CENTER);
         System.out.println("drew window");
-        textGUI.getActiveWindow().close();
         textGUI.getScreen().refresh();
         textGUI.getScreen().refresh();
         textGUI.getScreen().stopScreen();
@@ -86,8 +83,29 @@ public class TreeSearch {
 }
 
 class MyWindow extends Window {
-    public MyWindow() {
+    public MyWindow()
+    {
         super("My Window!");
-        addComponent(new Label("Welcome to TreeSearch"));
+        addComponent(new Button("Button with no action"));
+        addComponent(new Button("Button with action", new Action() {
+            @Override
+            public void doAction() {
+                MessageBox.showMessageBox(getOwner(), "Hello", "You selected the button with an action attached to it!");
+            }
+        }));
+        addComponent(new Button("Close", new closeWindow(this)));
     }
+
+class closeWindow implements Action {
+    private final Window window;
+
+    public closeWindow(Window window) {
+        this.window = window;
+    }
+
+    @Override
+    public void doAction() {
+        this.window.close();
+    }
+}
 }
