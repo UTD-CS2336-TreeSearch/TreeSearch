@@ -18,6 +18,8 @@ import java.util.Scanner;
 public class TreeSearch {
     BinaryTree<String> myTree = new BinaryTree<String>();
     public static void main(String[] args) throws InterruptedException {
+        System.setProperty("java.awt.headless", "true");
+
         GUIScreen textGUI = TerminalFacade.createGUIScreen();
         if(textGUI == null) {
             System.err.println("Couldn't allocate a terminal!");
@@ -95,6 +97,7 @@ class MyWindow extends Window {
         }));
         addComponent(new Button("Close", new closeWindow(this)));
     }
+}
 
 class closeWindow implements Action {
     private final Window window;
@@ -107,5 +110,4 @@ class closeWindow implements Action {
     public void doAction() {
         this.window.close();
     }
-}
 }
