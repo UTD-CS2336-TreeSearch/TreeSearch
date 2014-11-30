@@ -143,7 +143,6 @@ public class BinaryTree<E extends Comparable<E>> {
     }
 
     public PriorityQueue<flatStruct> flatten() {
-        System.out.println("Attempting to flatten");
         flatTree = new PriorityQueue<flatStruct>(size+1);
         walk(root, 1);
         return flatTree;

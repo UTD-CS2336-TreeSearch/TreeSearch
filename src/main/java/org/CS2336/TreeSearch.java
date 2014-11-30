@@ -41,7 +41,6 @@ public class TreeSearch {
         String input;
         while(file.hasNextLine()) {
             input = file.nextLine();
-            System.out.println("File had additional line: " + input);
             String[] arrayedInput = input.split(" ");
             //for (int i = 0; i < arrayedInput.length; i++){
                 myTree.insert(input);
