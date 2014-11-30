@@ -29,12 +29,8 @@ public class TreeSearch {
         textGUI.setTitle("GUI Test");
         //Do GUI logic here
 
-        System.out.println("made it to window launch");
         MyWindow myWindow = new MyWindow();
-        System.out.println("instantiated; drawing");
         textGUI.showWindow(myWindow, GUIScreen.Position.CENTER);
-        System.out.println("drew window");
-        textGUI.getScreen().refresh();
         textGUI.getScreen().refresh();
         textGUI.getScreen().stopScreen();
     }
