@@ -142,10 +142,14 @@ public class BinaryTree<E extends Comparable<E>> {
         return n;
     }
 
-    public PriorityQueue<flatStruct> flatten() {
+    public ArrayList<flatStruct> flatten() {
         flatTree = new PriorityQueue<flatStruct>(size+1);
         walk(root, 1);
-        return flatTree;
+        ArrayList<flatStruct> serialTree = new ArrayList<>();
+        while(!flatTree.isEmpty()) {
+            serialTree.add(flatTree.poll());
+        }
+        return serialTree;
     }
 
     class flatStruct implements Comparable<flatStruct> {
@@ -157,11 +161,11 @@ public class BinaryTree<E extends Comparable<E>> {
         }
 
         public int compareTo(flatStruct o) {
-            return o.index - index;
+            return index - o.index;
         }
 
         public String toString() {
-            return element.toString();
+            return "("+element.toString()+":"+index+")";
         }
     }
 }
