@@ -1,7 +1,12 @@
 package org.CS2336;
 
 import com.googlecode.lanterna.TerminalFacade;
+import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.GUIScreen;
+import com.googlecode.lanterna.gui.Window;
+import com.googlecode.lanterna.gui.component.Button;
+import com.googlecode.lanterna.gui.component.Label;
+import com.googlecode.lanterna.gui.dialog.MessageBox;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +17,9 @@ import java.util.Scanner;
 
 public class TreeSearch {
     BinaryTree<String> myTree = new BinaryTree<String>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("java.awt.headless", "true");
+
         GUIScreen textGUI = TerminalFacade.createGUIScreen();
         if(textGUI == null) {
             System.err.println("Couldn't allocate a terminal!");
@@ -20,10 +27,11 @@ public class TreeSearch {
         }
         textGUI.getScreen().startScreen();
         textGUI.setTitle("GUI Test");
-
-        
         //Do GUI logic here
 
+        MyWindow myWindow = new MyWindow();
+        textGUI.showWindow(myWindow, GUIScreen.Position.CENTER);
+        textGUI.getScreen().refresh();
         textGUI.getScreen().stopScreen();
     }
 
@@ -71,5 +79,33 @@ public class TreeSearch {
         } catch (IOException e){
             System.out.println("Exception occured " + e);
         }
+    }
+}
+
+class MyWindow extends Window {
+    public MyWindow()
+    {
+        super("My Window!");
+        addComponent(new Button("Button with no action"));
+        addComponent(new Button("Button with action", new Action() {
+            @Override
+            public void doAction() {
+                MessageBox.showMessageBox(getOwner(), "Hello", "You selected the button with an action attached to it!");
+            }
+        }));
+        addComponent(new Button("Close", new closeWindow(this)));
+    }
+}
+
+class closeWindow implements Action {
+    private final Window window;
+
+    public closeWindow(Window window) {
+        this.window = window;
+    }
+
+    @Override
+    public void doAction() {
+        this.window.close();
     }
 }
