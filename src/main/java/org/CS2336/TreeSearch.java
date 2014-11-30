@@ -2,6 +2,7 @@ package org.CS2336;
 
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.gui.Action;
+import com.googlecode.lanterna.gui.Component;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TreeSearch {
-    public static BinaryTree<String> myTree = new BinaryTree<String>();
+    public static BinaryTree<String> myTree = null;
     public static void main(String[] args) throws InterruptedException {
         //System.setProperty("java.awt.headless", "true");
 
@@ -31,7 +32,6 @@ public class TreeSearch {
 
         MainWindow mainWindow = new MainWindow(textGUI);
         textGUI.showWindow(mainWindow, GUIScreen.Position.CENTER);
-        textGUI.getScreen().refresh();
         textGUI.getScreen().stopScreen();
     }
 
@@ -39,12 +39,10 @@ public class TreeSearch {
     public static void buildFromFile(File newFile) throws FileNotFoundException {
         Scanner file = new Scanner(newFile);
         String input;
+        myTree = new BinaryTree<>();
         while(file.hasNextLine()) {
             input = file.nextLine();
-            String[] arrayedInput = input.split(" ");
-            //for (int i = 0; i < arrayedInput.length; i++){
                 myTree.insert(input);
-            //}
         }
     }
 
@@ -81,18 +79,27 @@ public class TreeSearch {
 }
 
 class MainWindow extends Window {
+    private final GUIScreen textGUI;
+
     public MainWindow(GUIScreen textGUI) {
         super("TreeSearch");
-        addComponent(new Button("Create Tree", new CreateTree(textGUI)));
-        addComponent(new Button("Close", new CloseWindow(this)));
+        this.textGUI = textGUI;
+        Button closeButton = new Button("Close", new CloseWindow(this));
+        addComponent(new Button("Create Tree", new CreateTree(textGUI, this, closeButton)));
+        addComponent(closeButton);
     }
 }
 
 class CreateTree implements Action {
     private final GUIScreen textGUI;
+    private final Window mainWindow;
+    private final Component closeButton;
     File treeFile = null;
-    public CreateTree(GUIScreen textGUI) {
+
+    public CreateTree(GUIScreen textGUI, Window mainWindow, Component closeButton) {
         this.textGUI = textGUI;
+        this.mainWindow = mainWindow;
+        this.closeButton = closeButton;
     }
 
     @Override
@@ -104,12 +111,31 @@ class CreateTree implements Action {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            MessageBox.showMessageBox(textGUI, "Tree size", "Size: " + TreeSearch.myTree.getSize());
-            //TODO Change this to use poll in order to obtain the nodes in order.
-            MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
+            MessageBox.showMessageBox(textGUI, "Tree size", "Nodes: " + TreeSearch.myTree.getSize());
+            if(TreeSearch.myTree != null) {
+                this.mainWindow.removeComponent(closeButton);
+                this.mainWindow.addComponent(new Button("Display Tree", new ShowTree(textGUI)));
+                this.mainWindow.addComponent(closeButton);
+            }
         }
     }
 }
+
+class ShowTree implements Action {
+    GUIScreen textGUI;
+
+    public ShowTree(GUIScreen textGUI) {
+        this.textGUI = textGUI;
+    }
+
+
+    @Override
+    public void doAction() {
+        //TODO Change this to use poll in order to obtain the nodes in order.
+        MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
+    }
+}
+
 
 class CloseWindow implements Action {
     private final Window window;
