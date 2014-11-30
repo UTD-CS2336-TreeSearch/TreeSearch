@@ -5,8 +5,7 @@ import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
-import com.googlecode.lanterna.gui.component.Label;
-import com.googlecode.lanterna.gui.dialog.MessageBox;
+import com.googlecode.lanterna.gui.dialog.FileDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TreeSearch {
-    BinaryTree<String> myTree = new BinaryTree<String>();
+    public static BinaryTree<String> myTree = new BinaryTree<String>();
     public static void main(String[] args) throws InterruptedException {
         System.setProperty("java.awt.headless", "true");
 
@@ -29,29 +28,14 @@ public class TreeSearch {
         textGUI.setTitle("GUI Test");
         //Do GUI logic here
 
-        MainWindow mainWindow = new MainWindow();
+        MainWindow mainWindow = new MainWindow(textGUI);
         textGUI.showWindow(mainWindow, GUIScreen.Position.CENTER);
         textGUI.getScreen().refresh();
         textGUI.getScreen().stopScreen();
     }
 
-
-    //Create tree from tree
-    //Create tree from tree
-    public void buildFromFile(File newFile) throws FileNotFoundException {
-        Scanner file = new Scanner(newFile);
-        String input;
-        if(file.hasNextLine()) {
-            input = file.nextLine();
-            String[] arrayedInput = input.split(" ");
-            for (int i = 0; i < arrayedInput.length; i++){
-                myTree.insert(arrayedInput[i]);
-            }
-        }
-    }
-
     //Print tree to file
-    public void printToFile() throws IOException {
+    public static void printToFile() throws IOException {
         try{
             File preorderOut = new File("preorder.out.text");
             PrintWriter printPreorder = new PrintWriter(preorderOut);
@@ -83,16 +67,44 @@ public class TreeSearch {
 }
 
 class MainWindow extends Window {
-    public MainWindow() {
+    public MainWindow(GUIScreen textGUI) {
         super("TreeSearch");
-        addComponent(new Button("Close", new closeWindow(this)));
+        addComponent(new Button("Create Tree", new CreateTree(textGUI)));
+        addComponent(new Button("Close", new CloseWindow(this)));
     }
 }
 
-class closeWindow implements Action {
+class CreateTree implements Action {
+    private final GUIScreen textGUI;
+    File treeFile = null;
+
+    public CreateTree(GUIScreen textGUI) {
+        this.textGUI = textGUI;
+    }
+
+    @Override
+    public void doAction() {
+        treeFile = FileDialog.showOpenFileDialog(this.textGUI, new File("."), "Select a file to become a tree:");
+        Scanner file = null;
+        try {
+            file = new Scanner(treeFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String input;
+        if (file.hasNextLine()) {
+            input = file.nextLine();
+            String[] arrayedInput = input.split(" ");
+            for (int i = 0; i < arrayedInput.length; i++) {
+                TreeSearch.myTree.insert(arrayedInput[i]);
+            }
+        }
+    }
+}
+class CloseWindow implements Action {
     private final Window window;
 
-    public closeWindow(Window window) {
+    public CloseWindow(Window window) {
         this.window = window;
     }
 
