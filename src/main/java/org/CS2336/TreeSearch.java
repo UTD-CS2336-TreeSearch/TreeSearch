@@ -29,8 +29,8 @@ public class TreeSearch {
         textGUI.setTitle("GUI Test");
         //Do GUI logic here
 
-        MyWindow myWindow = new MyWindow();
-        textGUI.showWindow(myWindow, GUIScreen.Position.CENTER);
+        MainWindow mainWindow = new MainWindow();
+        textGUI.showWindow(mainWindow, GUIScreen.Position.CENTER);
         textGUI.getScreen().refresh();
         textGUI.getScreen().stopScreen();
     }
@@ -82,17 +82,9 @@ public class TreeSearch {
     }
 }
 
-class MyWindow extends Window {
-    public MyWindow()
-    {
-        super("My Window!");
-        addComponent(new Button("Button with no action"));
-        addComponent(new Button("Button with action", new Action() {
-            @Override
-            public void doAction() {
-                MessageBox.showMessageBox(getOwner(), "Hello", "You selected the button with an action attached to it!");
-            }
-        }));
+class MainWindow extends Window {
+    public MainWindow() {
+        super("TreeSearch");
         addComponent(new Button("Close", new closeWindow(this)));
     }
 }
