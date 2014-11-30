@@ -34,6 +34,19 @@ public class TreeSearch {
         textGUI.getScreen().stopScreen();
     }
 
+
+    public static void buildFromFile(File newFile) throws FileNotFoundException {
+        Scanner file = new Scanner(newFile);
+        String input;
+        if(file.hasNextLine()) {
+            input = file.nextLine();
+            String[] arrayedInput = input.split(" ");
+            for (int i = 0; i < arrayedInput.length; i++){
+                myTree.insert(arrayedInput[i]);
+            }
+        }
+    }
+
     //Print tree to file
     public static void printToFile() throws IOException {
         try{
@@ -77,7 +90,6 @@ class MainWindow extends Window {
 class CreateTree implements Action {
     private final GUIScreen textGUI;
     File treeFile = null;
-
     public CreateTree(GUIScreen textGUI) {
         this.textGUI = textGUI;
     }
@@ -85,22 +97,14 @@ class CreateTree implements Action {
     @Override
     public void doAction() {
         treeFile = FileDialog.showOpenFileDialog(this.textGUI, new File("."), "Select a file to become a tree:");
-        Scanner file = null;
         try {
-            file = new Scanner(treeFile);
+            TreeSearch.buildFromFile(treeFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        String input;
-        if (file.hasNextLine()) {
-            input = file.nextLine();
-            String[] arrayedInput = input.split(" ");
-            for (int i = 0; i < arrayedInput.length; i++) {
-                TreeSearch.myTree.insert(arrayedInput[i]);
-            }
-        }
     }
 }
+
 class CloseWindow implements Action {
     private final Window window;
 
