@@ -2,6 +2,7 @@ package org.CS2336;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 
 public class BinaryTree<E extends Comparable<E>> {
@@ -129,31 +130,39 @@ public class BinaryTree<E extends Comparable<E>> {
         this.size = size;
     }
 
-    ArrayList<E> flatTree;
+    PriorityQueue<flatStruct> flatTree;
     private Node<E> walk(Node n, int index) {
-        System.out.println("Walking with parameters " + n + " " + index + " " + flatTree);
-        System.out.println("flattree size: " + flatTree.size());
-        flatTree.set(index, (E) (n.element));
-        System.out.println("Succeeded with set");
+        flatTree.add(new flatStruct(index, (E) n.element));
         if(n.left != null) {
-            return walk(n.left, 2 * index);
-        } else if(n.right != null) {
-            return walk(n.right, 2 * index + 1);
+            walk(n.left, 2 * index);
+        }
+        if(n.right != null) {
+            walk(n.right, 2 * index + 1);
         }
         return n;
     }
 
-    public ArrayList<E> flatten() {
+    public PriorityQueue<flatStruct> flatten() {
         System.out.println("Attempting to flatten");
-        flatTree = new ArrayList<E>(size+1);
-
-
-        for(int i=0; i<size; i++) {
-            flatTree.add(null);
-        }
-        System.out.println("flattree size: " + flatTree.size());
-
+        flatTree = new PriorityQueue<flatStruct>(size+1);
         walk(root, 1);
         return flatTree;
+    }
+
+    class flatStruct implements Comparable<flatStruct> {
+        int index;
+        E element;
+        public flatStruct(int index, E element) {
+            this.index = index;
+            this.element = element;
+        }
+
+        public int compareTo(flatStruct o) {
+            return o.index - index;
+        }
+
+        public String toString() {
+            return element.toString();
+        }
     }
 }

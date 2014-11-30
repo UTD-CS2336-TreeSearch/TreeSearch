@@ -106,6 +106,7 @@ class CreateTree implements Action {
                 e.printStackTrace();
             }
             MessageBox.showMessageBox(textGUI, "Tree size", "Size: " + TreeSearch.myTree.getSize());
+            //TODO Change this to use poll in order to obtain the nodes in order.
             MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
         }
     }
