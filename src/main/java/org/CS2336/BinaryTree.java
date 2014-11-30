@@ -1,5 +1,6 @@
 package org.CS2336;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -122,5 +123,27 @@ public class BinaryTree<E extends Comparable<E>> {
     public void order66() {
         root = null;
         size = 0;
+    }
+
+    private Node<E> walk(Node n, int index, ArrayList flatTree) {
+        System.out.println("Walking with parameters " + n + index + flatTree);
+        flatTree.set(index, n);
+        if(n.left != null) {
+            return walk(n.left, 2 * index, flatTree);
+        } else if(n.right != null) {
+            return walk(n.right, 2 * index + 1, flatTree);
+        }
+        return n;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public ArrayList<E> flatten() {
+        System.out.println("Attempting to flatten");
+        ArrayList<E> flatTree = new ArrayList<E>(size+1);
+        walk(root, 1, flatTree);
+        return flatTree;
     }
 }

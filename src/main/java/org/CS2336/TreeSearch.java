@@ -6,6 +6,7 @@ import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
 import com.googlecode.lanterna.gui.dialog.FileDialog;
+import com.googlecode.lanterna.gui.dialog.MessageBox;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ import java.util.Scanner;
 public class TreeSearch {
     public static BinaryTree<String> myTree = new BinaryTree<String>();
     public static void main(String[] args) throws InterruptedException {
-        System.setProperty("java.awt.headless", "true");
+        //System.setProperty("java.awt.headless", "true");
 
         GUIScreen textGUI = TerminalFacade.createGUIScreen();
         if(textGUI == null) {
@@ -38,12 +39,13 @@ public class TreeSearch {
     public static void buildFromFile(File newFile) throws FileNotFoundException {
         Scanner file = new Scanner(newFile);
         String input;
-        if(file.hasNextLine()) {
+        while(file.hasNextLine()) {
             input = file.nextLine();
+            System.out.println("File had additional line: " + input);
             String[] arrayedInput = input.split(" ");
-            for (int i = 0; i < arrayedInput.length; i++){
-                myTree.insert(arrayedInput[i]);
-            }
+            //for (int i = 0; i < arrayedInput.length; i++){
+                myTree.insert(input);
+            //}
         }
     }
 
@@ -97,10 +99,14 @@ class CreateTree implements Action {
     @Override
     public void doAction() {
         treeFile = FileDialog.showOpenFileDialog(this.textGUI, new File("."), "Select a file to become a tree:");
-        try {
-            TreeSearch.buildFromFile(treeFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if(treeFile != null) {
+            try {
+                TreeSearch.buildFromFile(treeFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            MessageBox.showMessageBox(textGUI, "Tree size", "Size: " + TreeSearch.myTree.getSize());
+            MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
         }
     }
 }
