@@ -139,13 +139,11 @@ class ShowTree implements Action {
 
         for(int i=0; i<serialTree.size(); i++) {
             if(serialTree.get(i).index == nodeIndex) {
-                System.out.println("node " + nodeIndex + " is at " + i);
                 currentNode = serialTree.get(i);
             }
         }
 
         if(currentNode == null) {
-            System.out.println("Node " + nodeIndex + " was not found.");
             return "";
         }
 
