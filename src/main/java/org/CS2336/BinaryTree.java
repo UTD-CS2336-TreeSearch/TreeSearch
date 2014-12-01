@@ -151,21 +151,21 @@ public class BinaryTree<E extends Comparable<E>> {
         }
         return serialTree;
     }
+}
 
-    class flatStruct implements Comparable<flatStruct> {
-        int index;
-        E element;
-        public flatStruct(int index, E element) {
-            this.index = index;
-            this.element = element;
-        }
+class flatStruct<E> implements Comparable<flatStruct> {
+    int index;
+    E element;
+    public flatStruct(int index, E element) {
+        this.index = index;
+        this.element = element;
+    }
 
-        public int compareTo(flatStruct o) {
-            return index - o.index;
-        }
+    public int compareTo(flatStruct o) {
+        return index - o.index;
+    }
 
-        public String toString() {
-            return "("+element.toString()+":"+index+")";
-        }
+    public String toString() {
+        return "("+element.toString()+":"+index+")";
     }
 }

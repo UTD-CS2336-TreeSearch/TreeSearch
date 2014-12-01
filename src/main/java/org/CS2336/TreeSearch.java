@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class TreeSearch {
@@ -123,16 +124,53 @@ class CreateTree implements Action {
 
 class ShowTree implements Action {
     GUIScreen textGUI;
+    String outString="";
+    private final ArrayList<flatStruct> serialTree;
 
     public ShowTree(GUIScreen textGUI) {
         this.textGUI = textGUI;
+        serialTree = TreeSearch.myTree.flatten();
     }
 
 
+    private String explode(int nodeIndex) {
+        flatStruct currentNode = null;
+        outString="";
+
+
+        for(int i=0; i<serialTree.size(); i++) {
+            if(serialTree.get(i).index == nodeIndex) {
+                System.out.println("node " + nodeIndex + " is at " + i);
+                currentNode = serialTree.get(i);
+            }
+        }
+
+        if(currentNode == null) {
+            System.out.println("Node " + nodeIndex + " was not found.");
+            return "";
+        }
+
+        if(nodeIndex != 0) {
+            for(int i=nodeIndex; i>0; i/=2) {
+                outString += "  ";
+            }
+            outString += "-";
+        }
+
+        outString += currentNode.index + "\n";
+
+        outString += explode(nodeIndex*2);
+        outString += explode(nodeIndex*2+1);
+
+        return outString;
+    }
+
     @Override
     public void doAction() {
-        //TODO Change this to use poll in order to obtain the nodes in order.
         MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
+
+        MessageBox.showMessageBox(textGUI, "Tree", explode(1));
+        System.out.println(explode(1));
     }
 }
 
