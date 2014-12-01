@@ -10,11 +10,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/**
- * Created by maldridge on 12/1/14.
- */
 class RunReport implements Action {
     private final GUIScreen textGUI;
+
     public RunReport(GUIScreen textGUI) {
         this.textGUI = textGUI;
     }

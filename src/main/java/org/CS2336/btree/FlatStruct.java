@@ -4,6 +4,7 @@ package org.CS2336.btree;
 public class FlatStruct<E> implements Comparable<FlatStruct> {
     int index;
     E element;
+
     public FlatStruct(int index, E element) {
         this.index = index;
         this.element = element;
@@ -22,6 +23,6 @@ public class FlatStruct<E> implements Comparable<FlatStruct> {
     }
 
     public String toString() {
-        return "("+element.toString()+":"+index+")";
+        return "(" + element.toString() + ":" + index + ")";
     }
 }

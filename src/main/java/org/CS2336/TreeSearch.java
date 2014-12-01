@@ -7,14 +7,12 @@ import org.CS2336.gfx.MainWindow;
 
 public class TreeSearch {
     public static BinaryTree<String> myTree = null;
+
     public static void main(String[] args) throws InterruptedException {
         //System.setProperty("java.awt.headless", "true");
 
         GUIScreen textGUI = TerminalFacade.createGUIScreen();
-        if(textGUI == null) {
-            System.err.println("Couldn't allocate a terminal!");
-            return;
-        }
+
         textGUI.getScreen().startScreen();
         textGUI.setTitle("GUI Test");
         //Do GUI logic here

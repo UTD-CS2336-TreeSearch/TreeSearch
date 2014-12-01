@@ -1,16 +1,12 @@
 package org.CS2336.btree;
 
-import org.CS2336.btree.FlatStruct;
-
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-/**
- * Created by maldridge on 12/1/14.
- */
 public class BinaryTree<E extends Comparable<E>> {
     protected BinaryTree.Node<E> root;
     protected int size = 0;
+    PriorityQueue<FlatStruct> flatTree;
 
     //Default constructor
     public BinaryTree() {
@@ -107,6 +103,42 @@ public class BinaryTree<E extends Comparable<E>> {
         preorder(root.right, storage);
     }
 
+    //Return the size
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    //Clear array
+    public void order66() {
+        root = null;
+        size = 0;
+    }
+
+    private BinaryTree.Node<E> walk(BinaryTree.Node n, int index) {
+        flatTree.add(new FlatStruct(index, (E) n.element));
+        if (n.left != null) {
+            walk(n.left, 2 * index);
+        }
+        if (n.right != null) {
+            walk(n.right, 2 * index + 1);
+        }
+        return n;
+    }
+
+    public ArrayList<FlatStruct> flatten() {
+        flatTree = new PriorityQueue<FlatStruct>(size + 1);
+        walk(root, 1);
+        ArrayList<FlatStruct> serialTree = new ArrayList<>();
+        while (!flatTree.isEmpty()) {
+            serialTree.add(flatTree.poll());
+        }
+        return serialTree;
+    }
+
     //The core nucleus thingy kajigger
     public static class Node<E extends Comparable<E>> {
         protected E element;
@@ -116,42 +148,5 @@ public class BinaryTree<E extends Comparable<E>> {
         public Node(E e) {
             element = e;
         }
-    }
-
-    //Return the size
-    public int getSize() {
-        return size;
-    }
-
-    //Clear array
-    public void order66() {
-        root = null;
-        size = 0;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    PriorityQueue<FlatStruct> flatTree;
-    private BinaryTree.Node<E> walk(BinaryTree.Node n, int index) {
-        flatTree.add(new FlatStruct(index, (E) n.element));
-        if(n.left != null) {
-            walk(n.left, 2 * index);
-        }
-        if(n.right != null) {
-            walk(n.right, 2 * index + 1);
-        }
-        return n;
-    }
-
-    public ArrayList<FlatStruct> flatten() {
-        flatTree = new PriorityQueue<FlatStruct>(size+1);
-        walk(root, 1);
-        ArrayList<FlatStruct> serialTree = new ArrayList<>();
-        while(!flatTree.isEmpty()) {
-            serialTree.add(flatTree.poll());
-        }
-        return serialTree;
     }
 }
