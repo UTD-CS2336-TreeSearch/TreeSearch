@@ -14,7 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class TreeSearch {
@@ -157,7 +156,7 @@ class ShowTree implements Action {
             outString += "-";
         }
 
-        outString += currentNode.index + "\n";
+        outString += currentNode.element.toString() + "\n";
 
         outString += explode(nodeIndex*2);
         outString += explode(nodeIndex*2+1);
@@ -170,7 +169,6 @@ class ShowTree implements Action {
         MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
 
         MessageBox.showMessageBox(textGUI, "Tree", explode(1));
-        System.out.println(explode(1));
     }
 }
 
