@@ -8,6 +8,7 @@ import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
 import com.googlecode.lanterna.gui.dialog.FileDialog;
 import com.googlecode.lanterna.gui.dialog.MessageBox;
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,38 +34,6 @@ public class TreeSearch {
         MainWindow mainWindow = new MainWindow(textGUI);
         textGUI.showWindow(mainWindow, GUIScreen.Position.CENTER);
         textGUI.getScreen().stopScreen();
-    }
-
-
-    //Print tree to file
-    public static void printToFile() throws IOException {
-        try{
-            File preorderOut = new File("preorder.out.text");
-            PrintWriter printPreorder = new PrintWriter(preorderOut);
-            ArrayList<String> preorderstorage = new ArrayList(myTree.preorder());
-            printPreorder.println(preorderstorage);
-            printPreorder.close();
-        } catch (IOException e){
-            System.out.println("Exception occured " + e);
-        }
-        try {
-            File inorderOut = new File("inorder.out.text");
-            PrintWriter printInorder = new PrintWriter(inorderOut);
-            ArrayList<String> inorderstorage = new ArrayList(myTree.inorder());
-            printInorder.println(inorderstorage);
-            printInorder.close();
-        } catch (IOException e){
-            System.out.println("Exception occured " + e);
-        }
-        try{
-            File postorderOut = new File("postorder.out.text");
-            PrintWriter printPostorder = new PrintWriter(postorderOut);
-            ArrayList<String> postorderstorage = new ArrayList(myTree.postorder());
-            printPostorder.println(postorderstorage);
-            printPostorder.close();
-        } catch (IOException e){
-            System.out.println("Exception occured " + e);
-        }
     }
 }
 
@@ -111,6 +80,7 @@ class CreateTree implements Action {
             if(TreeSearch.myTree != null) {
                 this.mainWindow.removeComponent(closeButton);
                 this.mainWindow.addComponent(new Button("Display Tree", new ShowTree(textGUI)));
+                this.mainWindow.addComponent(new Button("Run reports", new RunReport(textGUI)));
                 this.mainWindow.addComponent(closeButton);
             }
         }
@@ -161,22 +131,51 @@ class ShowTree implements Action {
     @Override
     public void doAction() {
         MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
-
         MessageBox.showMessageBox(textGUI, "Tree", explode(1));
     }
 }
 
-class RunReport implements Action{
-    public RunReport() {
-
+class RunReport implements Action {
+    private final GUIScreen textGUI;
+    public RunReport(GUIScreen textGUI) {
+        this.textGUI = textGUI;
     }
 
 
     @Override
     public void doAction() {
-
+        //Print tree to file
+        try {
+            File preorderOut = new File("preorder.out.text");
+            PrintWriter printPreorder = new PrintWriter(preorderOut);
+            ArrayList<String> preorderstorage = new ArrayList(TreeSearch.myTree.preorder());
+            printPreorder.println(preorderstorage);
+            printPreorder.close();
+        } catch (IOException e) {
+            System.out.println("Exception occured " + e);
+        }
+        try {
+            File inorderOut = new File("inorder.out.text");
+            PrintWriter printInorder = new PrintWriter(inorderOut);
+            ArrayList<String> inorderstorage = new ArrayList(TreeSearch.myTree.inorder());
+            printInorder.println(inorderstorage);
+            printInorder.close();
+        } catch (IOException e) {
+            System.out.println("Exception occured " + e);
+        }
+        try {
+            File postorderOut = new File("postorder.out.text");
+            PrintWriter printPostorder = new PrintWriter(postorderOut);
+            ArrayList<String> postorderstorage = new ArrayList(TreeSearch.myTree.postorder());
+            printPostorder.println(postorderstorage);
+            printPostorder.close();
+        } catch (IOException e) {
+            System.out.println("Exception occured " + e);
+        }
+        MessageBox.showMessageBox(textGUI, "Success!", "Report generation successful!");
     }
 }
+
 
 
 class CloseWindow implements Action {
