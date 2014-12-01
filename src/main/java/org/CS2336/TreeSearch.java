@@ -36,16 +36,6 @@ public class TreeSearch {
     }
 
 
-    public static void buildFromFile(File newFile) throws FileNotFoundException {
-        Scanner file = new Scanner(newFile);
-        String input;
-        myTree = new BinaryTree<>();
-        while(file.hasNextLine()) {
-            input = file.nextLine();
-                myTree.insert(input);
-        }
-    }
-
     //Print tree to file
     public static void printToFile() throws IOException {
         try{
@@ -107,7 +97,13 @@ class CreateTree implements Action {
         treeFile = FileDialog.showOpenFileDialog(this.textGUI, new File("."), "Select a file to become a tree:");
         if(treeFile != null) {
             try {
-                TreeSearch.buildFromFile(treeFile);
+                Scanner file = new Scanner(treeFile);
+                String input;
+                TreeSearch.myTree = new BinaryTree<>();
+                while(file.hasNextLine()) {
+                    input = file.nextLine();
+                    TreeSearch.myTree.insert(input);
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -167,6 +163,18 @@ class ShowTree implements Action {
         MessageBox.showMessageBox(textGUI, "Tree flatness", TreeSearch.myTree.flatten().toString());
 
         MessageBox.showMessageBox(textGUI, "Tree", explode(1));
+    }
+}
+
+class RunReport implements Action{
+    public RunReport() {
+
+    }
+
+
+    @Override
+    public void doAction() {
+
     }
 }
 
