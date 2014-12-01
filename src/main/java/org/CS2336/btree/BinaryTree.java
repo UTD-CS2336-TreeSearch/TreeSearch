@@ -1,12 +1,15 @@
-package org.CS2336;
+package org.CS2336.btree;
 
-import java.lang.reflect.Array;
+import org.CS2336.btree.FlatStruct;
+
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-
+/**
+ * Created by maldridge on 12/1/14.
+ */
 public class BinaryTree<E extends Comparable<E>> {
-    protected Node<E> root;
+    protected BinaryTree.Node<E> root;
     protected int size = 0;
 
     //Default constructor
@@ -21,7 +24,7 @@ public class BinaryTree<E extends Comparable<E>> {
 
     //Search for value
     public boolean search(E e) {
-        Node<E> current = root;
+        BinaryTree.Node<E> current = root;
         while (current != null) {
             if (e.compareTo(current.element) < 0)
                 current = current.left;
@@ -36,10 +39,10 @@ public class BinaryTree<E extends Comparable<E>> {
     //Insert value
     public boolean insert(E e) {
         if (root == null)
-            root = new Node<E>(e);
+            root = new BinaryTree.Node<E>(e);
         else {
-            Node<E> parent = null;
-            Node<E> current = root;
+            BinaryTree.Node<E> parent = null;
+            BinaryTree.Node<E> current = root;
             while (current != null) {
                 if (e.compareTo(current.element) < 0) {
                     parent = current;
@@ -51,9 +54,9 @@ public class BinaryTree<E extends Comparable<E>> {
                     return false;
             }
             if (e.compareTo(parent.element) < 0)
-                parent.left = new Node<E>(e);
+                parent.left = new BinaryTree.Node<E>(e);
             else
-                parent.right = new Node<E>(e);
+                parent.right = new BinaryTree.Node<E>(e);
         }
         size++;
         return true; // Element inserted
@@ -66,7 +69,7 @@ public class BinaryTree<E extends Comparable<E>> {
         return storage;
     }
 
-    protected void inorder(Node<E> root, ArrayList<E> storage) {
+    protected void inorder(BinaryTree.Node<E> root, ArrayList<E> storage) {
         if (root == null)
             return;
         inorder(root.left, storage);
@@ -81,7 +84,7 @@ public class BinaryTree<E extends Comparable<E>> {
         return storage;
     }
 
-    protected void postorder(Node<E> root, ArrayList<E> storage) {
+    protected void postorder(BinaryTree.Node<E> root, ArrayList<E> storage) {
         if (root == null)
             return;
         postorder(root.left, storage);
@@ -96,7 +99,7 @@ public class BinaryTree<E extends Comparable<E>> {
         return storage;
     }
 
-    protected void preorder(Node<E> root, ArrayList<E> storage) {
+    protected void preorder(BinaryTree.Node<E> root, ArrayList<E> storage) {
         if (root == null)
             return;
         storage.add(root.element);
@@ -107,8 +110,8 @@ public class BinaryTree<E extends Comparable<E>> {
     //The core nucleus thingy kajigger
     public static class Node<E extends Comparable<E>> {
         protected E element;
-        protected Node<E> left;
-        protected Node<E> right;
+        protected BinaryTree.Node<E> left;
+        protected BinaryTree.Node<E> right;
 
         public Node(E e) {
             element = e;
@@ -130,9 +133,9 @@ public class BinaryTree<E extends Comparable<E>> {
         this.size = size;
     }
 
-    PriorityQueue<flatStruct> flatTree;
-    private Node<E> walk(Node n, int index) {
-        flatTree.add(new flatStruct(index, (E) n.element));
+    PriorityQueue<FlatStruct> flatTree;
+    private BinaryTree.Node<E> walk(BinaryTree.Node n, int index) {
+        flatTree.add(new FlatStruct(index, (E) n.element));
         if(n.left != null) {
             walk(n.left, 2 * index);
         }
@@ -142,30 +145,13 @@ public class BinaryTree<E extends Comparable<E>> {
         return n;
     }
 
-    public ArrayList<flatStruct> flatten() {
-        flatTree = new PriorityQueue<flatStruct>(size+1);
+    public ArrayList<FlatStruct> flatten() {
+        flatTree = new PriorityQueue<FlatStruct>(size+1);
         walk(root, 1);
-        ArrayList<flatStruct> serialTree = new ArrayList<>();
+        ArrayList<FlatStruct> serialTree = new ArrayList<>();
         while(!flatTree.isEmpty()) {
             serialTree.add(flatTree.poll());
         }
         return serialTree;
-    }
-}
-
-class flatStruct<E> implements Comparable<flatStruct> {
-    int index;
-    E element;
-    public flatStruct(int index, E element) {
-        this.index = index;
-        this.element = element;
-    }
-
-    public int compareTo(flatStruct o) {
-        return index - o.index;
-    }
-
-    public String toString() {
-        return "("+element.toString()+":"+index+")";
     }
 }
