@@ -9,7 +9,10 @@ public class TreeSearch {
     public static BinaryTree<String> myTree = null;
 
     public static void main(String[] args) throws InterruptedException {
-        System.setProperty("java.awt.headless", "true");
+        if(System.console() != null) {
+            //draw inline iff a console is available
+            System.setProperty("java.awt.headless", "true");
+        }
 
         GUIScreen textGUI = TerminalFacade.createGUIScreen();
 
