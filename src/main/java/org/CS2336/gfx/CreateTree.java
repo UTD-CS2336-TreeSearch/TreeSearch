@@ -40,7 +40,8 @@ public class CreateTree implements Action {
         if (TreeSearch.myTree != null) {
             MessageBox.showMessageBox(textGUI, "Tree size", "Nodes: " + TreeSearch.myTree.getSize());
 
-            this.mainWindow.removeComponent(closeButton);
+            this.mainWindow.removeAllComponents();
+            this.mainWindow.addComponent(new Button("Create Tree" , new CreateTree(textGUI, mainWindow, closeButton)));
             this.mainWindow.addComponent(new Button("Display Tree", new ShowTree(textGUI)));
             this.mainWindow.addComponent(new Button("Run reports", new RunReport(textGUI)));
             this.mainWindow.addComponent(closeButton);
