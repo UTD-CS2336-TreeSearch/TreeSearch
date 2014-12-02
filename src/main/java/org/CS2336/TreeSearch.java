@@ -12,11 +12,20 @@ import java.io.IOException;
 public class TreeSearch {
     public static BinaryTree<String> myTree = null;
 
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws IOException {
         if(args.length == 1) {
             System.out.println(args[0]);
-            Util.buildTree(new File(args[0]));
-            Util.runReport(myTree);
+            if(!Util.buildTree(new File(args[0]))) {
+                System.err.println("[ERROR] Could not build tree - duplicate node.");
+                return;
+            }
+
+            try {
+                Util.runAllReports(myTree);
+            } catch(IOException e) {
+                System.out.println("An error occured while writing reports: " + e.toString());
+            }
+
             System.out.println(Util.explode(myTree));
             return;
         }

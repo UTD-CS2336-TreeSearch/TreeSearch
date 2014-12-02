@@ -15,7 +15,15 @@ import java.util.Scanner;
  */
 public class Util {
 
-    public static void runReport(BinaryTree tree) throws IOException {
+    public static String runAllReports(BinaryTree tree) throws IOException {
+        String fullReport = "";
+        fullReport += "In-Order " + reportInOrder(tree) + '\n';
+        fullReport += "Post-Order " + reportPostOrder(tree) +'\n';
+        fullReport += "Pre-Order " + reportPreOrder(tree) + '\n';
+        return fullReport;
+    }
+
+    public static String reportPreOrder(BinaryTree tree) throws IOException {
 
         //attempt to create a directory for the reports to go in
         File reportDir = new File("report");
@@ -28,26 +36,54 @@ public class Util {
             treeDir.mkdir();
         }
 
-
-        //Print tree to file
         File preorderOut = new File(treeDir.getCanonicalPath(), "preorder.txt");
         PrintWriter printPreorder = new PrintWriter(preorderOut);
         ArrayList<String> preorderstorage = new ArrayList(tree.preorder());
         printPreorder.println(preorderstorage);
         printPreorder.close();
+        return preorderstorage.toString();
+    }
 
+    public static String reportInOrder(BinaryTree tree) throws IOException {
+
+        //attempt to create a directory for the reports to go in
+        File reportDir = new File("report");
+        if (!reportDir.exists()) {
+            reportDir.mkdir();
+        }
+
+        File treeDir = new File(reportDir.getCanonicalPath(), tree.getName());
+        if (!treeDir.exists()) {
+            treeDir.mkdir();
+        }
 
         File inorderOut = new File(treeDir.getCanonicalPath(), "inorder.txt");
         PrintWriter printInorder = new PrintWriter(inorderOut);
         ArrayList<String> inorderstorage = new ArrayList(tree.inorder());
         printInorder.println(inorderstorage);
         printInorder.close();
+        return inorderstorage.toString();
+    }
+
+    public static String reportPostOrder(BinaryTree tree) throws IOException {
+
+        //attempt to create a directory for the reports to go in
+        File reportDir = new File("report");
+        if (!reportDir.exists()) {
+            reportDir.mkdir();
+        }
+
+        File treeDir = new File(reportDir.getCanonicalPath(), tree.getName());
+        if (!treeDir.exists()) {
+            treeDir.mkdir();
+        }
 
         File postorderOut = new File(treeDir.getCanonicalPath(), "postorder.txt");
         PrintWriter printPostorder = new PrintWriter(postorderOut);
         ArrayList<String> postorderstorage = new ArrayList(tree.postorder());
         printPostorder.println(postorderstorage);
         printPostorder.close();
+        return postorderstorage.toString();
     }
 
     public static String explode(BinaryTree tree) {
