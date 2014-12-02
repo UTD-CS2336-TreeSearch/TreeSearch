@@ -14,18 +14,19 @@ public class TreeSearch {
 
     public static void main(String[] args) throws IOException {
         if(args.length == 1) {
-            System.out.println(args[0]);
+            System.out.println("Processing file " + args[0]);
             if(!Util.buildTree(new File(args[0]))) {
                 System.err.println("[ERROR] Could not build tree - duplicate node.");
                 return;
             }
 
             try {
-                Util.runAllReports(myTree);
+                System.out.println(Util.runAllReports(myTree));
             } catch(IOException e) {
                 System.out.println("An error occured while writing reports: " + e.toString());
             }
 
+            System.out.println("Tree visualization:");
             System.out.println(Util.explode(myTree));
             return;
         }
