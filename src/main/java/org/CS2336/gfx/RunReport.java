@@ -4,12 +4,10 @@ import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.dialog.MessageBox;
 import org.CS2336.TreeSearch;
-import org.CS2336.btree.Reporting;
+import org.CS2336.btree.Util;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+
 
 class RunReport implements Action {
     private final GUIScreen textGUI;
@@ -21,7 +19,11 @@ class RunReport implements Action {
 
     @Override
     public void doAction() {
-        Reporting.runReport(TreeSearch.myTree);
-        MessageBox.showMessageBox(textGUI, "Success!", "Report generation successful!");
+        try {
+            Util.runReport(TreeSearch.myTree);
+            MessageBox.showMessageBox(textGUI, "Success!", "Report generation successful!");
+        } catch(IOException e) {
+            MessageBox.showMessageBox(textGUI, "ERROR", "A serious error has occurred" + e.toString());
+        }
     }
 }

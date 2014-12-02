@@ -7,6 +7,7 @@ public class BinaryTree<E extends Comparable<E>> {
     protected BinaryTree.Node<E> root;
     protected int size = 0;
     PriorityQueue<FlatStruct> flatTree;
+    private String name = "";
 
     //Default constructor
     public BinaryTree() {
@@ -110,6 +111,14 @@ public class BinaryTree<E extends Comparable<E>> {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     //Clear array

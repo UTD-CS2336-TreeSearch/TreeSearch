@@ -10,35 +10,39 @@ import java.util.ArrayList;
 /**
  * Created by maldridge on 12/2/14.
  */
-public class Reporting {
-    public static void runReport(BinaryTree tree) {
+public class Util {
+    public static void runReport(BinaryTree tree) throws IOException {
+
+        //attempt to create a directory for the reports to go in
+        File reportDir = new File("report");
+        if(!reportDir.exists()) {
+            reportDir.mkdir();
+        }
+
+        File treeDir = new File(reportDir.getCanonicalPath(), tree.getName());
+        if(!treeDir.exists()) {
+            treeDir.mkdir();
+        }
+
+
         //Print tree to file
-        try {
-            File preorderOut = new File("preorder.out.text");
+            File preorderOut = new File(treeDir.getCanonicalPath(), "preorder.txt");
             PrintWriter printPreorder = new PrintWriter(preorderOut);
             ArrayList<String> preorderstorage = new ArrayList(tree.preorder());
             printPreorder.println(preorderstorage);
             printPreorder.close();
-        } catch (IOException e) {
-            System.out.println("Exception occured " + e);
-        }
-        try {
-            File inorderOut = new File("inorder.out.text");
+
+
+            File inorderOut = new File(treeDir.getCanonicalPath(), "inorder.txt");
             PrintWriter printInorder = new PrintWriter(inorderOut);
             ArrayList<String> inorderstorage = new ArrayList(tree.inorder());
             printInorder.println(inorderstorage);
             printInorder.close();
-        } catch (IOException e) {
-            System.out.println("Exception occured " + e);
-        }
-        try {
-            File postorderOut = new File("postorder.out.text");
+
+            File postorderOut = new File(treeDir.getCanonicalPath(), "postorder.txt");
             PrintWriter printPostorder = new PrintWriter(postorderOut);
             ArrayList<String> postorderstorage = new ArrayList(tree.postorder());
             printPostorder.println(postorderstorage);
             printPostorder.close();
-        } catch (IOException e) {
-            System.out.println("Exception occured " + e);
-        }
     }
 }

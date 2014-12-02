@@ -46,6 +46,7 @@ public class CreateTree implements Action {
                         }
                     }
                 }
+                TreeSearch.myTree.setName(treeFile.getName());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
