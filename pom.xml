@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   <version>RC1</version>
   <name>TreeSearch</name>
-  <url>http://maven.apache.org</url>
+  <url>http://www.utdallas.edu/~mwa130030/TreeSearch/</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
