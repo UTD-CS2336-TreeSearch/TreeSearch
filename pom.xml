@@ -62,4 +62,40 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <!-- List the core committers -->
+  <developers>
+    <developer>
+      <id>maldridge</id>
+      <name>Michael Aldridge</name>
+      <roles>
+        <role>architect</role>
+      </roles>
+      <timezone>-6</timezone>
+    </developer>
+    <developer>
+      <id>ktillotson</id>
+      <name>Kyle Tillotson</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>-6</timezone>
+    </developer>
+    <developer>
+      <id>NeekNack</id>
+      <name>Nicholas Orton</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>-6</timezone>
+    </developer>
+    <developer>
+      <id>AsylumRunner</id>
+      <name>Michael Burdick</name>
+      <roles>
+        <role>documentation</role>
+      </roles>
+      <timezone>-6</timezone>
+    </developer>
+  </developers>
 </project>
