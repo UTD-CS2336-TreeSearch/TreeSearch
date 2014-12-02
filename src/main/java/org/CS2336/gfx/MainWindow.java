@@ -9,7 +9,7 @@ public class MainWindow extends Window {
     private final GUIScreen textGUI;
 
     public MainWindow(GUIScreen textGUI) {
-        super("TreeSearch");
+        super("Main Menu");
         this.textGUI = textGUI;
         Button closeButton = new Button("Close", new CloseWindow(this));
         addComponent(new Button("Create Tree", new CreateTree(textGUI, this, closeButton)));

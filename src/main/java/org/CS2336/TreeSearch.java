@@ -39,8 +39,7 @@ public class TreeSearch {
         GUIScreen textGUI = TerminalFacade.createGUIScreen();
 
         textGUI.getScreen().startScreen();
-        textGUI.setTitle("GUI Test");
-        //Do GUI logic here
+        textGUI.setTitle("TreeSearch");
 
         MainWindow mainWindow = new MainWindow(textGUI);
         textGUI.showWindow(mainWindow, GUIScreen.Position.CENTER);
