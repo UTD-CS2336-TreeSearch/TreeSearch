@@ -1,11 +1,14 @@
 package org.CS2336.btree;
 
+import com.googlecode.lanterna.gui.dialog.MessageBox;
 import org.CS2336.TreeSearch;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by maldridge on 12/2/14.
@@ -16,36 +19,37 @@ public class Util {
 
         //attempt to create a directory for the reports to go in
         File reportDir = new File("report");
-        if(!reportDir.exists()) {
+        if (!reportDir.exists()) {
             reportDir.mkdir();
         }
 
         File treeDir = new File(reportDir.getCanonicalPath(), tree.getName());
-        if(!treeDir.exists()) {
+        if (!treeDir.exists()) {
             treeDir.mkdir();
         }
 
 
         //Print tree to file
-            File preorderOut = new File(treeDir.getCanonicalPath(), "preorder.txt");
-            PrintWriter printPreorder = new PrintWriter(preorderOut);
-            ArrayList<String> preorderstorage = new ArrayList(tree.preorder());
-            printPreorder.println(preorderstorage);
-            printPreorder.close();
+        File preorderOut = new File(treeDir.getCanonicalPath(), "preorder.txt");
+        PrintWriter printPreorder = new PrintWriter(preorderOut);
+        ArrayList<String> preorderstorage = new ArrayList(tree.preorder());
+        printPreorder.println(preorderstorage);
+        printPreorder.close();
 
 
-            File inorderOut = new File(treeDir.getCanonicalPath(), "inorder.txt");
-            PrintWriter printInorder = new PrintWriter(inorderOut);
-            ArrayList<String> inorderstorage = new ArrayList(tree.inorder());
-            printInorder.println(inorderstorage);
-            printInorder.close();
+        File inorderOut = new File(treeDir.getCanonicalPath(), "inorder.txt");
+        PrintWriter printInorder = new PrintWriter(inorderOut);
+        ArrayList<String> inorderstorage = new ArrayList(tree.inorder());
+        printInorder.println(inorderstorage);
+        printInorder.close();
 
-            File postorderOut = new File(treeDir.getCanonicalPath(), "postorder.txt");
-            PrintWriter printPostorder = new PrintWriter(postorderOut);
-            ArrayList<String> postorderstorage = new ArrayList(tree.postorder());
-            printPostorder.println(postorderstorage);
-            printPostorder.close();
+        File postorderOut = new File(treeDir.getCanonicalPath(), "postorder.txt");
+        PrintWriter printPostorder = new PrintWriter(postorderOut);
+        ArrayList<String> postorderstorage = new ArrayList(tree.postorder());
+        printPostorder.println(postorderstorage);
+        printPostorder.close();
     }
+
     public static String explode(BinaryTree tree) {
         final ArrayList<FlatStruct> serialTree = tree.flatten();
         return explode(serialTree, 1);
@@ -79,5 +83,27 @@ public class Util {
         outString += explode(serialTree, nodeIndex * 2 + 1);
 
         return outString;
+    }
+
+    public static boolean buildTree(File treeFile) throws FileNotFoundException {
+        if (treeFile != null) {
+            Scanner file = new Scanner(treeFile);
+            String input;
+            TreeSearch.myTree = new BinaryTree<>();
+            if (file.hasNextLine()) {
+                input = file.nextLine();
+                String[] nodes = input.split(" ");
+                for (int i = 0; i < nodes.length; i++) {
+                    if (!TreeSearch.myTree.insert(nodes[i])) {
+                        TreeSearch.myTree = null;
+                        return false;
+                    }
+                }
+            }
+            TreeSearch.myTree.setName(treeFile.getName());
+            return true;
+        } else {
+            return false;
+        }
     }
 }
