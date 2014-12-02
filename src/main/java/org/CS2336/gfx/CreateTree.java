@@ -35,15 +35,23 @@ public class CreateTree implements Action {
                 Scanner file = new Scanner(treeFile);
                 String input;
                 TreeSearch.myTree = new BinaryTree<>();
-                while (file.hasNextLine()) {
+                if(file.hasNextLine()) {
                     input = file.nextLine();
-                    TreeSearch.myTree.insert(input);
+                    String[] nodes = input.split(" ");
+                    for(int i=0; i<nodes.length; i++) {
+                        if(!TreeSearch.myTree.insert(nodes[i])) {
+                            MessageBox.showMessageBox(textGUI, "ERROR", "Duplicate nodes are not allowed in a Binary Tree");
+                            TreeSearch.myTree = null;
+                            break;
+                        }
+                    }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            MessageBox.showMessageBox(textGUI, "Tree size", "Nodes: " + TreeSearch.myTree.getSize());
             if (TreeSearch.myTree != null) {
+                MessageBox.showMessageBox(textGUI, "Tree size", "Nodes: " + TreeSearch.myTree.getSize());
+
                 this.mainWindow.removeComponent(closeButton);
                 this.mainWindow.addComponent(new Button("Display Tree", new ShowTree(textGUI)));
                 this.mainWindow.addComponent(new Button("Run reports", new RunReport(textGUI)));
