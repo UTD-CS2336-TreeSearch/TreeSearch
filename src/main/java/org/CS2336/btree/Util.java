@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * Created by maldridge on 12/2/14.
  */
 public class Util {
+
     public static void runReport(BinaryTree tree) throws IOException {
 
         //attempt to create a directory for the reports to go in
@@ -44,5 +45,39 @@ public class Util {
             ArrayList<String> postorderstorage = new ArrayList(tree.postorder());
             printPostorder.println(postorderstorage);
             printPostorder.close();
+    }
+    public static String explode(BinaryTree tree) {
+        final ArrayList<FlatStruct> serialTree = tree.flatten();
+        return explode(serialTree, 1);
+    }
+
+    private static String explode(ArrayList<FlatStruct> serialTree, int nodeIndex) {
+        FlatStruct currentNode = null;
+        String outString = "";
+
+
+        for (int i = 0; i < serialTree.size(); i++) {
+            if (serialTree.get(i).getIndex() == nodeIndex) {
+                currentNode = serialTree.get(i);
+            }
+        }
+
+        if (currentNode == null) {
+            return "";
+        }
+
+        if (nodeIndex != 0) {
+            for (int i = nodeIndex; i > 0; i /= 2) {
+                outString += "  ";
+            }
+            outString += "-";
+        }
+
+        outString += currentNode.getElement().toString() + "\n";
+
+        outString += explode(serialTree, nodeIndex * 2);
+        outString += explode(serialTree, nodeIndex * 2 + 1);
+
+        return outString;
     }
 }
