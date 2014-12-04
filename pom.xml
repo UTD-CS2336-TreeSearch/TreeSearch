@@ -7,6 +7,12 @@
   <version>RC1</version>
   <name>TreeSearch</name>
   <url>http://www.utdallas.edu/~mwa130030/TreeSearch/</url>
+
+  <organization>
+    <name>UTD-CS2336-TreeSearch</name>
+    <url>http://www.github.com/UTD-CS2336-TreeSearch</url>
+  </organization>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
