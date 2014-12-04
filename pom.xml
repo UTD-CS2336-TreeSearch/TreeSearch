@@ -137,4 +137,8 @@
     <tag>HEAD</tag>
     <url>https://github.com/UTD-CS2336-TreeSearch/TreeSearch</url>
   </scm>
+
+  <distributionManagement>
+    <downloadUrl>https://github.com/UTD-CS2336-TreeSearch/TreeSearch</downloadUrl>
+  </distributionManagement>
 </project>
