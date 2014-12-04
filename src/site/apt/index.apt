@@ -25,10 +25,12 @@ Building for Windows
 	 version of the Java SDK installed.  After unzipping the
 	 installation you will need to set up the following user environment
 	 variables:
+
+---
 	 Variable	|	Value
 	 M2		|	%M2_HOME%\bin
 	 M2_Home	|	(location of your unzipped maven files)
-
+---
 	 You will also have to prepend "%M2%" to the path system variable.
 	 Once finished, you then navigate to the directory containing
 	 pom.xml, which should be the TreeSearch folder, and run the following

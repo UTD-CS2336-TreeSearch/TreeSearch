@@ -13,7 +13,7 @@ own command line interface finished by the insane Michael Aldridge.
 Running
 -------
 TreeSearch comes pre-built with it's own .jar containing everything
-needed to run in a pre-existing Java environment.  Just run (insert file name here)
+needed to run in a pre-existing Java environment.  Just run uber-TreeSearch-RC1.jar
 and a window will open.  The program can also be run from the
 command line using the following command:
 
@@ -28,9 +28,10 @@ found at maven.apache.org.  You will also need to have the most recent
 version of the Java SDK installed.  After unzipping the
 installation you will need to set up the following user environment
 variables:
-Variable	|	Value
-M2			%M2_HOME%\bin
-M2_Home		|	(location of your unzipped maven files)
+
+    Variable	|	Value
+    M2		|	%M2_HOME%\bin
+    M2_Home	|	(location of your unzipped maven files)
 
 You will also have to prepend "%M2%" to the path system variable.
 Once finished, you then navigate to the directory containing
