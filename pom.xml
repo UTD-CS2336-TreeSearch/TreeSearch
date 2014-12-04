@@ -13,6 +13,8 @@
     <url>http://www.github.com/UTD-CS2336-TreeSearch</url>
   </organization>
 
+  <description>Final project for CS2 at UTD</description>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
