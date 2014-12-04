@@ -1,16 +1,9 @@
-TreeSearch
-12-04-2014
-RC1
+TreeSearch | 12-04-2014 | RC1
 
 About
 -----
 
-CS 2336.001 Class Project
-Group 11
-Michael Aldridge
-Michael Burdick
-Nicholas Orton
-Kyle Tillotson
+CS 2336.001 Class Project | Group 11 | Michael Aldridge | Michael Burdick | Nicholas Orton | Kyle Tillotson
 
 TreeSearch is designed to run in Java to build a tree from a plain
 text file, display the tree, then print the tree using preorder,
