@@ -63,6 +63,6 @@ on whichever machine can run Maven, but you are better off using the
 included .jar file.  Trust me.
 
 ----------------------------------------
-(License go here)
+This project is licensed under the MIT Open Source license.  Please find the LICENSE.txt file in the root directory of this project.
 
 [![Build Status](https://travis-ci.org/UTD-CS2336-TreeSearch/TreeSearch.svg?branch=master)](https://travis-ci.org/UTD-CS2336-TreeSearch/TreeSearch)
