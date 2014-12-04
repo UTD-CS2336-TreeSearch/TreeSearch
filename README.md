@@ -57,7 +57,7 @@ The most up-to-date version can be found on git at:
 System-specific Notes
 ---------------------
 
-Program was build in Debian, a Linux based operation system.  It is
+Program was built in Debian, a Linux based operation system.  It is
 machine portable due to the nature of Java.  You can build it yourself
 on whichever machine can run Maven, but you are better off using the
 included .jar file.  Trust me.
