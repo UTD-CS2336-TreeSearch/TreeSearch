@@ -125,4 +125,10 @@
     <system>Travis CI</system>
     <url>https://travis-ci.org/UTD-CS2336-TreeSearch/TreeSearch</url>
   </ciManagement>
+
+  <scm>
+    <connection>scm:git:https://github.com/UTD-CS2336-TreeSearch/TreeSearch.git</connection>
+    <tag>HEAD</tag>
+    <url>https://github.com/UTD-CS2336-TreeSearch/TreeSearch</url>
+  </scm>
 </project>
