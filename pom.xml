@@ -47,38 +47,6 @@
           <target>1.7</target>
         </configuration>
       </plugin>
-      <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-site-plugin</artifactId>
-	<version>3.0</version>
-	<executions>
-	  <execution>
-	    <id>attach-descriptor</id>
-	    <goals>
-	      <goal>attach-descriptor</goal>
-	    </goals>
-	  </execution>
-	</executions>
-	<configuration>
-	  <reportPlugins>
-	    <plugin>
-	      <groupId>org.apache.maven.plugins</groupId>
-	      <artifactId>maven-project-info-reports-plugin</artifactId>
-	      <version>2.4</version>
-	      <reportSets>
-		<reportSet>
-		  <reports>
-		    <report>dependencies</report>
-		    <report>project-team</report>
-		    <report>license</report>
-		    <report>issue-tracking</report>
-		  </reports>
-		</reportSet>
-	      </reportSets>
-	    </plugin>
-	  </reportPlugins>
-	</configuration> 
-      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -143,8 +111,13 @@
   <licenses>
     <license>
       <name>MIT License</name>
-      <url>http://opensource.org/licenses/MIT</url>
+      <url>http://utdallas.edu/~mwa130030/licenses/CS2336.txt</url>
       <distribution>manual</distribution>
     </license>
   </licenses>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/UTD-CS2336-TreeSearch/TreeSearch/issues</url>
+  </issueManagement>
 </project>
